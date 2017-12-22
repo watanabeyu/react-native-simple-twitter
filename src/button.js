@@ -6,11 +6,16 @@ import {
   Modal,
   WebView,
   StyleSheet,
-  SafeAreaView
+  SafeAreaView,
+  Platform,
+  Dimensions
 } from 'react-native';
 
 /* client */
 import twitter from './client';
+
+/* dimensions */
+const { height, width } = Dimensions.get('window')
 
 export default class TWLoginButton extends React.Component {
   constructor(props) {
@@ -94,11 +99,11 @@ export default class TWLoginButton extends React.Component {
             <Text style={[styles.buttonText, this.props.textStyle]}>{this.props.children}</Text>
           </TouchableOpacity>
         </View>
-        <Modal visible={this.state.isVisible} animationType="slide">
+        <Modal visible={this.state.isVisible} animationType="slide" onRequestClose={() => { }}>
           <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }]}>
             <View style={[styles.modalHeader, { backgroundColor: this.props.headerColor }, this.props.headerStyle]}>
               <TouchableOpacity onPress={this.onClosePress} style={[styles.closeButton, this.props.closeStyle]}>
-                <Text style={[styles.closeButtonText, this.props.closeTextStyle]}>{this.props.closeLabel}</Text>
+                <Text style={[styles.closeButtonText, this.props.closeTextStyle]}>{this.props.closeText}</Text>
               </TouchableOpacity>
             </View>
             <WebView source={{ uri: this.state.authUrl }} onNavigationStateChange={this.onNavigationStateChange} />
@@ -128,7 +133,8 @@ const styles = StyleSheet.create({
   },
   modalHeader: {
     flexDirection: "row",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
+    paddingTop: (Platform.OS === "ios" && width === 414) ? 20 : 0
   },
   closeButton: {
     padding: 16

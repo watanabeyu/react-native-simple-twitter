@@ -45,6 +45,9 @@ export default class HomeScreen extends React.Component {
           ]
         )
       }
+      else {
+        console.warn(r)
+      }
     })
   }
 

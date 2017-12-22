@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   }
 })
 ```
-Checkout [example](#usage).
+Checkout [example](https://github.com/watanabeyu/react-native-simple-twitter/tree/v1.0.x/example).
 
 ## TWLoginButton props
 

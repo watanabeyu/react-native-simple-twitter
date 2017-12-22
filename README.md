@@ -22,6 +22,8 @@ npm install react-native-simple-twitter --save
 
 ## Demo
 
+![demo gif](extras/demo.gif)
+
 ## Usage
 ```js
 import React from 'react'
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
   }
 })
 ```
-Checkout [example](https://github.com/watanabeyu/react-native-simple-twitter/tree/v1.0.x/example).
+Checkout [example](example).
 
 ## TWLoginButton props
 

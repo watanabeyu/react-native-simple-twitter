@@ -2,6 +2,8 @@
 import * as Util from './util';
 
 export default Request = async (_method = "GET", _url = "", _params = {}) => {
+  url = _url.replace(/\!/g, "%21").replace(/\'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/\*/g, "%2A");
+
   const options = {
     method: _method,
     headers: {
@@ -9,7 +11,7 @@ export default Request = async (_method = "GET", _url = "", _params = {}) => {
     }
   }
 
-  return await fetch(_url, options)
+  return await fetch(url, options)
     .then(response => {
       const contentType = response.headers.get("content-type")
 

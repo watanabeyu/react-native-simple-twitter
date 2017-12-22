@@ -62,7 +62,7 @@ export const createTokenRequestHeaderParams = (_consumerKey = '', { callback = '
  * create OAuth1.0 signature from params
  */
 export const createSignature = (_params, _method, _url, _consumerSecret, _tokenSecret = null) => {
-  const encodedParameters = encodeParamsToString(_params);
+  const encodedParameters = encodeParamsToString(_params).replace(/\!/g, '%21').replace(/\'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A');
   const encodedRequestURL = encodeURIComponent(_url);
 
   const signature = Base64.stringify(HmacSHA1(

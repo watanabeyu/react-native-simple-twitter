@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "react-native-simple-twitter-example",
+    "description": "example of react-native-simple-twitter.",
+    "slug": "react-native-simple-twitter-example",
+    "privacy": "public",
+    "sdkVersion": "24.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "primaryColor": "#4CAF50",
+    "extra": {
+      "twitter": {
+        "consumerKey": "sIaBRZBbihUabSRkENZUjWL2e",
+        "consumerKeySecret": "u6qePkEENXuI5zttzFMYzIL335JBAGq38kpF8FGzptVgBt1CvB"
+      }
+    },
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "loading": {
+      "icon": "./assets/images/icon.png",
+      "backgroundColor": "#ffffff"
+    }
+  }
+}

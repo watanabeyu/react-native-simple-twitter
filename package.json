@@ -1,0 +1,27 @@
+{
+  "name": "react-native-simple-twitter",
+  "version": "1.0.0",
+  "description": "Twitter API client for React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:watanabeyu/react-native-simple-twitter.git"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "twitter"
+  ],
+  "author": "Yu Watanabe <fight.ippatu5648@gmail.com> (https://github.com/watanabeyu)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watanabeyu/react-native-simple-twitter/issues"
+  },
+  "homepage": "https://github.com/watanabeyu/react-native-simple-twitter",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
+}

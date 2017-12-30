@@ -207,3 +207,14 @@ Checkout [example](example).
 * `twitter.api(method,endpoint,parameters)` - call twitter api.
 * `twitter.get(endpoint,parameters)` - call twitter get api.
 * `twitter.post(endpoint,parameters)` - call twitter post api.
+
+## Other API
+
+* decodeHTMLEntities
+```js
+import { decodeHTMLEntities } from 'react-native-simple-twitter'
+
+console.log(decodeHTMLEntities("&amp; &apos; &#x27; &#x2F; &#39; &#47; &lt; &gt; &nbsp; &quot;"))
+```
+Tweet is include htmlencoded characters.  
+So this function decode special characters.

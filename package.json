@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-twitter",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Twitter API client for React Native",
   "main": "index.js",
   "scripts": {

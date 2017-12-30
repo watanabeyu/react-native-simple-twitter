@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { Constants } from 'expo'
 
 /* import twitter */
-import twitter, { TWLoginButton } from 'react-native-simple-twitter'
+import twitter, { TWLoginButton, decodeHTMLEntities } from 'react-native-simple-twitter'
 
 @connect(
   state => ({
@@ -34,6 +34,8 @@ export default class LoginScreen extends React.Component {
       isVisible: false,
       authUrl: null
     }
+
+    console.log(decodeHTMLEntities("&amp; &apos; &#x27; &#x2F; &#39; &#47; &lt; &gt; &nbsp; &quot;"))
   }
 
   async componentWillMount() {

@@ -102,7 +102,7 @@ export default class TWLoginButton extends React.Component {
           </TouchableOpacity>
         </View>
         <Modal visible={this.state.isVisible} animationType="slide" onRequestClose={() => { }}>
-          <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }, { backgroundColor: "#fcc" }]}>
+          <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }]}>
             <View style={[styles.modalHeader, { backgroundColor: this.props.headerColor }, this.props.headerStyle]}>
               <TouchableOpacity onPress={this.onClosePress} style={[styles.closeButton, this.props.closeStyle]}>
                 <Text style={[styles.closeButtonText, this.props.closeTextStyle]}>{this.props.closeText}</Text>

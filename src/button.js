@@ -6,10 +6,12 @@ import {
   Modal,
   WebView,
   StyleSheet,
-  SafeAreaView,
   Platform,
   Dimensions
 } from 'react-native';
+
+/* npm */
+import SafeAreaView from 'react-native-safe-area-view';
 
 /* client */
 import twitter from './client';
@@ -100,7 +102,7 @@ export default class TWLoginButton extends React.Component {
           </TouchableOpacity>
         </View>
         <Modal visible={this.state.isVisible} animationType="slide" onRequestClose={() => { }}>
-          <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }]}>
+          <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }, { backgroundColor: "#fcc" }]}>
             <View style={[styles.modalHeader, { backgroundColor: this.props.headerColor }, this.props.headerStyle]}>
               <TouchableOpacity onPress={this.onClosePress} style={[styles.closeButton, this.props.closeStyle]}>
                 <Text style={[styles.closeButtonText, this.props.closeTextStyle]}>{this.props.closeText}</Text>
@@ -116,7 +118,7 @@ export default class TWLoginButton extends React.Component {
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1
+    flex: 1,
   },
   container: {
     backgroundColor: "transparent"
@@ -134,7 +136,6 @@ const styles = StyleSheet.create({
   modalHeader: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    paddingTop: (Platform.OS === "ios" && width === 414) ? 20 : 0
   },
   closeButton: {
     padding: 16

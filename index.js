@@ -6,4 +6,7 @@ export default Client;
 export TWLoginButton from './src/button';
 
 /* other */
-export { decodeHTMLEntities } from './src/lib';
+export {
+  decodeHTMLEntities,
+  getRelativeTime
+} from './src/lib';

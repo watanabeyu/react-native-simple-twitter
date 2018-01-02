@@ -218,3 +218,13 @@ console.log(decodeHTMLEntities("&amp; &apos; &#x27; &#x2F; &#39; &#47; &lt; &gt;
 ```
 Tweet is include htmlencoded characters.  
 So this function decode special characters.
+
+* getRelativeTime
+```js
+import { getRelativeTime } from 'react-native-simple-twitter'
+
+console.log(getRelativeTime(new Date(new Date().getTime() - 32390)))
+console.log(getRelativeTime("Thu Apr 06 15:28:43 +0000 2017"))
+```
+Tweet created_at convert to relative time.
+ex) 1s 15m 23h

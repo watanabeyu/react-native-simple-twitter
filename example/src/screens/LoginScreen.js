@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { Constants } from 'expo'
 
 /* import twitter */
-import twitter, { TWLoginButton, decodeHTMLEntities } from 'react-native-simple-twitter'
+import twitter, { TWLoginButton, decodeHTMLEntities, getRelativeTime } from 'react-native-simple-twitter'
 
 @connect(
   state => ({
@@ -36,6 +36,8 @@ export default class LoginScreen extends React.Component {
     }
 
     console.log(decodeHTMLEntities("&amp; &apos; &#x27; &#x2F; &#39; &#47; &lt; &gt; &nbsp; &quot;"))
+    console.log(getRelativeTime(new Date(new Date().getTime() - 32390)))
+    console.log(getRelativeTime("Thu Apr 06 15:28:43 +0000 2017"))
   }
 
   async componentWillMount() {

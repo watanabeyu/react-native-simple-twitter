@@ -5,8 +5,8 @@ import { addNavigationHelpers, StackNavigator, NavigationActions } from 'react-n
 import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 
 /* screen */
-import LoginScreen from 'rnstExampleApp/src/screens/LoginScreen';
-import HomeScreen from 'rnstExampleApp/src/screens/HomeScreen';
+import LoginScreen from 'rnstexampleapp/src/screens/LoginScreen';
+import HomeScreen from 'rnstexampleapp/src/screens/HomeScreen';
 
 /* AppNavigator */
 export const AppNavigator = StackNavigator(

@@ -43,6 +43,8 @@ export default class TWLoginButton extends React.Component {
 
     this.token = null;
     this.user = null;
+
+    console.log('hoge');
   }
 
   onNavigationStateChange = async (webViewState) => {

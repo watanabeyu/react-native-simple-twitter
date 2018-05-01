@@ -2,9 +2,9 @@ import React from 'react';
 import { StatusBar, View, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 
-import { configureStore } from 'rnstExampleApp/src/store';
-import AppWithNavigationState from 'rnstExampleApp/src/navigation/AppNavigator';
-import store from 'rnstExampleApp/src/store';
+import { configureStore } from 'rnstexampleapp/src/store';
+import AppWithNavigationState from 'rnstexampleapp/src/navigation/AppNavigator';
+import store from 'rnstexampleapp/src/store';
 
 export default class Navigation extends React.Component {
   render() {

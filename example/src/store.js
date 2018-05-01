@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 
 /* from app */
-import reducers from 'rnstExampleApp/src/reducers';
+import reducers from 'rnstexampleapp/src/reducers';
 
 const logger = store => next => (action) => {
   if (__DEV__) {

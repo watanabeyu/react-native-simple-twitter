@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ justifyContent: "center", alignItems: "center", paddingTop: 32, }}>
-          <Image source={require('rnstExampleApp/assets/images/ok_man.png')} style={{ width: 184, height: 200 }} />
+          <Image source={require('rnstexampleapp/assets/images/ok_man.png')} style={{ width: 184, height: 200 }} />
         </View>
         <View style={styles.content}>
           <Text style={styles.name}>{this.props.user.name} @{this.props.user.screen_name}</Text>

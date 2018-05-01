@@ -1,12 +1,17 @@
 /* client */
 import Client from './src/client';
+import TWLoginButton from './src/button';
+import {
+  decodeHTMLEntities,
+  getRelativeTime,
+} from './src/lib';
+
+/* export Client as default */
 export default Client;
 
-/* components */
-export TWLoginButton from './src/button';
-
-/* other */
+/* export other */
 export {
+  TWLoginButton,
   decodeHTMLEntities,
-  getRelativeTime
-} from './src/lib';
+  getRelativeTime,
+};

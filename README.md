@@ -193,6 +193,7 @@ Checkout [example](example).
 | closeStyle | any | null | Webview close button style |
 | closeText | string | 'close' | Webview close button text |
 | closeTextStyle | any | null | Webview close button text style |
+| onPress | func | (e) => {} | Called when login button on Press | 
 | onGetAccessToken | func | ({oauth_token,oauth_token_secret}) => {} | Called when get access token |
 | onClose | func | () => {} | Called when press close button |
 | onSuccess | func | (user) => {} | Called when logged in and get user account |

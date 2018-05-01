@@ -1,16 +1,28 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 
-/* reducer */
-import * as reducers from 'app/src/reducers'
+/* from app */
+import reducers from 'rnstExampleApp/src/reducers';
 
-export function configureStore() {
-  const reducer = combineReducers({
-    ...reducers
-  })
+const logger = store => next => (action) => {
+  if (__DEV__) {
+    if (action.type.indexOf('Navigation') === -1) {
+      console.log(action);
+    }
+  }
+  next(action);
+};
 
-  const store = createStore(
-    reducer
-  )
+/* create store */
+const store = createStore(
+  combineReducers({ ...reducers }),
+  applyMiddleware(
+    createReactNavigationReduxMiddleware(
+      'root',
+      state => state.nav,
+    ),
+    logger,
+  ),
+);
 
-  return store
-}
+export default store;

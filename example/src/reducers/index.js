@@ -1,2 +1,7 @@
-export nav from './nav'
-export user from './user'
+import nav from './nav'
+import user from './user'
+
+export default {
+  nav,
+  user,
+}

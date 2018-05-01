@@ -5,92 +5,97 @@ import {
   TouchableOpacity,
   Modal,
   WebView,
-  StyleSheet,
-  Platform,
-  Dimensions
 } from 'react-native';
 
 /* npm */
 import SafeAreaView from 'react-native-safe-area-view';
 
 /* client */
-import twitter from './client';
-
-/* dimensions */
-const { height, width } = Dimensions.get('window')
+import twitter from '../client';
+import styles from './styles';
 
 export default class TWLoginButton extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isVisible: false,
-      authUrl: null
-    }
-  }
-
   static defaultProps = {
-    children: "Login with Twitter",
+    children: 'Login with Twitter',
     callbackUrl: null,
     containerStyle: null,
     style: null,
     textStyle: null,
-    headerColor: "#efefef",
+    headerColor: '#efefef',
     headerStyle: null,
     closeStyle: null,
-    closeText: "close",
+    closeText: 'close',
     closeTextStyle: null,
+    onPress: () => { },
     onGetAccessToken: () => { },
     onClose: () => { },
     onSuccess: () => { },
     onError: () => { },
   }
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isVisible: false,
+      authUrl: null,
+    };
+
+    this.token = null;
+    this.user = null;
+  }
+
   onNavigationStateChange = async (webViewState) => {
-    if (match = webViewState.url.match(/\?oauth_token=.+\&oauth_verifier=(.+)/)) {
+    const match = webViewState.url.match(/\?oauth_token=.+\&oauth_verifier=(.+)/);
+
+    if (match.length > 0) {
       this.setState({
-        isVisible: false
-      })
+        isVisible: false,
+      });
 
       /* get access token */
-      let token
       try {
-        token = await twitter.getAccessToken(match[1])
+        this.token = await twitter.getAccessToken(match[1]);
       } catch (err) {
-        console.warn(`[getAccessToken failed] ${err}`)
-        this.props.onError(err)
+        console.warn(`[getAccessToken failed] ${err}`);
+        this.props.onError(err);
 
-        return false
+        return false;
       }
 
-      await this.props.onGetAccessToken(token)
+      await this.props.onGetAccessToken(this.token);
 
       /* get account */
-      let user
       try {
-        user = await twitter.get("account/verify_credentials.json", { include_entities: false, skip_status: true, include_email: true })
+        this.user = await twitter.get('account/verify_credentials.json', { include_entities: false, skip_status: true, include_email: true });
       } catch (err) {
-        console.warn(`[get("account/verify_credentials.json") failed] ${err}`)
-        this.props.onError(err)
+        console.warn(`[get("account/verify_credentials.json") failed] ${err}`);
+        this.props.onError(err);
 
-        return false
+        return false;
       }
 
-      this.props.onSuccess(user)
+      this.props.onSuccess(this.user);
+
+      return true;
     }
+
+    return false;
   }
 
   onButtonPress = async (e) => {
+    await this.props.onPress(e);
+
     this.setState({
       isVisible: true,
-      authUrl: await twitter.getLoginUrl(this.props.callbackUrl)
-    })
+      authUrl: await twitter.getLoginUrl(this.props.callbackUrl),
+    });
   }
 
-  onClosePress = (e) => {
+  onClosePress = async (e) => {
     this.setState({
-      isVisible: false
-    }, () => this.props.onClose(e))
+      isVisible: false,
+    }, () => this.props.onClose(e));
   }
 
   render() {
@@ -115,32 +120,3 @@ export default class TWLoginButton extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    backgroundColor: "transparent"
-  },
-  button: {
-    backgroundColor: "#1da1f2",
-    paddingVertical: 16
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-  },
-  closeButton: {
-    padding: 16
-  },
-  closeButtonText: {
-    fontSize: 16
-  }
-});

@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "rnstExampleApp",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -9,15 +9,16 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^24.0.0",
-    "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
+    "expo": "^27.0.1",
+    "react": "16.3.2",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-simple-twitter": "^1.2.0",
-    "react-navigation": "^1.0.0-beta.21",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "react-navigation": "^1.5.11",
+    "react-navigation-redux-helpers": "^1.0.5",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   },
   "devDependencies": {
-    "jest-expo": "^24.0.0"
+    "jest-expo": "^27.0.1"
   }
 }

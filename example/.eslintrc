@@ -1,0 +1,69 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": "airbnb",
+  "globals": {
+    "__DEV__": true
+  },
+  "rules": {
+    "max-len": [
+      1,
+      140,
+      2
+    ],
+    "react/no-did-mount-set-state": 0,
+    "react/display-name": [
+      0,
+      {
+        "ignoreTranspilerName": false
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": [
+      0
+    ],
+    "react/prefer-stateless-function": [
+      0,
+      {
+        "ignorePureComponents": true
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false,
+        "packageDir": "./"
+      }
+    ],
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": [
+          "^app\/.+$"
+        ]
+      }
+    ],
+    "import/extensions": [
+      ".js",
+      ".jsx"
+    ]
+  },
+  "settings": {
+    "import/core-modules": [
+      "app"
+    ]
+  }
+}

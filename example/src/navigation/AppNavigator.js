@@ -2,10 +2,11 @@ import React from 'react';
 import { AppState } from 'react-native';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator, NavigationActions } from 'react-navigation';
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 
 /* screen */
-import LoginScreen from 'app/src/screens/LoginScreen';
-import HomeScreen from 'app/src/screens/HomeScreen';
+import LoginScreen from 'rnstExampleApp/src/screens/LoginScreen';
+import HomeScreen from 'rnstExampleApp/src/screens/HomeScreen';
 
 /* AppNavigator */
 export const AppNavigator = StackNavigator(
@@ -34,6 +35,12 @@ export default class AppWithNavigationState extends React.Component {
   }
 
   render() {
-    return <AppNavigator navigation={addNavigationHelpers({ dispatch: this.props.dispatch, state: this.props.nav })} />;
+    const helper = {
+      dispatch: this.props.dispatch,
+      state: this.props.nav,
+      addListener: createReduxBoundAddListener('root'),
+    };
+
+    return <AppNavigator navigation={addNavigationHelpers(helper)} />;
   }
 }

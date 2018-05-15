@@ -75,7 +75,7 @@ class Client {
     const apiEndpoint = endpoint.slice(0, 1) !== '/' ? `/${endpoint}` : endpoint;
 
     this.TokenRequestHeaderParams = Util.createTokenRequestHeaderParams(this.ConsumerKey, { token: this.Token, params });
-    this.TokenRequestHeaderParams = Util.createSignature(this.TokenRequestHeaderParams, apiMethod, apiURL + endpoint, this.ConsumerSecret, this.TokenSecret);
+    this.TokenRequestHeaderParams = Util.createSignature(this.TokenRequestHeaderParams, apiMethod, apiURL + apiEndpoint, this.ConsumerSecret, this.TokenSecret);
 
     const result = await Request(
       apiMethod,

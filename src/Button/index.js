@@ -50,7 +50,7 @@ export default class TWLoginButton extends React.Component {
   onNavigationStateChange = async (webViewState) => {
     const match = webViewState.url.match(/\?oauth_token=.+\&oauth_verifier=(.+)/);
 
-    if (match.length > 0) {
+    if (match && match.length > 0) {
       this.setState({
         isVisible: false,
       });

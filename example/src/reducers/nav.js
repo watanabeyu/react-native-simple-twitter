@@ -1,4 +1,4 @@
-import { AppNavigator } from 'rnstExampleApp/src/navigation/AppNavigator';
+import { AppNavigator } from 'rnstexampleapp/src/navigation/AppNavigator';
 
 const initialState = null;
 

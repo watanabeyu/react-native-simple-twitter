@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppLoading, Asset, Font, Constants } from 'expo'
-import Navigation from 'rnstExampleApp/src'
+import Navigation from 'rnstexampleapp/src'
 
 /* npm */
 import twitter from 'react-native-simple-twitter'
@@ -32,8 +32,8 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        require('rnstExampleApp/assets/images/icon.png'),
-        require('rnstExampleApp/assets/images/ok_man.png')
+        require('rnstexampleapp/assets/images/icon.png'),
+        require('rnstexampleapp/assets/images/ok_man.png')
       ]),
       twitter.setConsumerKey(Constants.manifest.extra.twitter.consumerKey, Constants.manifest.extra.twitter.consumerKeySecret)
     ])

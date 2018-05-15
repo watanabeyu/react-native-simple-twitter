@@ -39,12 +39,12 @@ class Client {
     this.TokenRequestHeaderParams = Util.createTokenRequestHeaderParams(this.ConsumerKey, { callback });
     this.TokenRequestHeaderParams = Util.createSignature(this.TokenRequestHeaderParams, 'POST', baseURL + requestTokenURL, this.ConsumerSecret);
 
-    const { oauthToken, oauthTokenSecret } = await Request(
+    const result = await Request(
       'POST',
       baseURL + requestTokenURL,
       this.TokenRequestHeaderParams,
     );
-    this.setAccessToken(oauthToken, oauthTokenSecret);
+    this.setAccessToken(result.oauth_token, result.oauth_token_secret);
 
     return `${baseURL + authorizationURL}?oauth_token=${this.Token}`;
   }
@@ -57,14 +57,14 @@ class Client {
     this.TokenRequestHeaderParams = Util.createSignature(this.TokenRequestHeaderParams, 'POST', baseURL + accessTokenURL, this.ConsumerSecret, this.TokenSecret);
     this.TokenRequestHeaderParams.oauth_verifier = verifier;
 
-    const { oauthToken, oauthTokenSecret } = await Request(
+    const result = await Request(
       'POST',
       baseURL + accessTokenURL,
       this.TokenRequestHeaderParams,
     );
-    this.setAccessToken(oauthToken, oauthTokenSecret);
+    this.setAccessToken(result.oauth_token, result.oauth_token_secret);
 
-    return { oauthToken, oauthTokenSecret };
+    return { oauth_token: result.oauth_token, oauth_token_secret: result.oauth_token_secret };
   }
 
   /**

@@ -43,8 +43,6 @@ export default class TWLoginButton extends React.Component {
 
     this.token = null;
     this.user = null;
-
-    console.log('hoge');
   }
 
   onNavigationStateChange = async (webViewState) => {
@@ -57,7 +55,13 @@ export default class TWLoginButton extends React.Component {
 
       /* get access token */
       try {
-        this.token = await twitter.getAccessToken(match[1]);
+        const response = await twitter.getAccessToken(match[1]);
+
+        if (response.errors) {
+          throw new Error(JSON.stringify(response.errors));
+        }
+
+        this.token = response;
       } catch (err) {
         console.warn(`[getAccessToken failed] ${err}`);
         this.props.onError(err);
@@ -69,7 +73,13 @@ export default class TWLoginButton extends React.Component {
 
       /* get account */
       try {
-        this.user = await twitter.get('account/verify_credentials.json', { include_entities: false, skip_status: true, include_email: true });
+        const response = await twitter.get('account/verify_credentials.json', { include_entities: false, skip_status: true, include_email: true });
+
+        if (response.errors) {
+          throw new Error(JSON.stringify(response.errors));
+        }
+
+        this.user = response;
       } catch (err) {
         console.warn(`[get("account/verify_credentials.json") failed] ${err}`);
         this.props.onError(err);

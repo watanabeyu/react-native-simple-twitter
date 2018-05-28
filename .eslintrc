@@ -64,7 +64,8 @@
   "settings": {
     "import/core-modules": [
       "react",
-      "react-native"
+      "react-native",
+      "@expo/vector-icons"
     ]
   }
 }

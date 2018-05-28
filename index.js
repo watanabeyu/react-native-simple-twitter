@@ -1,6 +1,6 @@
 /* client */
 import Client from './src/client';
-import TWLoginButton from './src/Button';
+import TWLoginButton from './src/Components/Button';
 import {
   decodeHTMLEntities,
   getRelativeTime,

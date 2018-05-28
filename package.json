@@ -23,7 +23,8 @@
   "homepage": "https://github.com/watanabeyu/react-native-simple-twitter",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "react-native-safe-area-view": "^0.7.0"
+    "react-native-safe-area-view": "^0.7.0",
+    "@expo/vector-icons": "^6.3.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

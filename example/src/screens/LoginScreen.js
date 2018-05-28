@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Alert,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -86,6 +86,10 @@ export default class LoginScreen extends React.Component {
     )
   }
 
+  onPress = (e) => {
+    console.log("button pressed")
+  }
+
   onClose = (e) => {
     console.log("press close button")
   }
@@ -100,16 +104,14 @@ export default class LoginScreen extends React.Component {
         <View style={styles.title}>
           <Text style={styles.titleText}>Login</Text>
         </View>
-        <TWLoginButton headerColor={Constants.manifest.primaryColor}
-          containerStyle={styles.loginContainer}
-          style={styles.loginButton}
-          textStyle={styles.loginButtonText}
+        <TWLoginButton
+          style={{ width: "100%", height: 60 }}
+          type="TouchableOpacity"
+          onPress={this.onPress}
           onGetAccessToken={this.onGetAccessToken}
           onSuccess={this.onSuccess}
-          closeText="閉じる"
-          closeTextStyle={styles.loginCloseText}
           onClose={this.onClose}
-          onError={this.onError}>Twitter IDではじめる</TWLoginButton>
+          onError={this.onError}><Text style={{ textAlign: "center", color: "#fff" }}>Twitterでログインする</Text></TWLoginButton>
       </View>
     )
   }
@@ -130,25 +132,4 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold"
   },
-  loginContainer: {
-    paddingHorizontal: 32,
-    marginBottom: 64,
-    backgroundColor: "transparent"
-  },
-  loginButton: {
-    backgroundColor: "#fff",
-    paddingVertical: 16,
-    borderRadius: 64,
-    overflow: "hidden"
-  },
-  loginButtonText: {
-    color: Constants.manifest.primaryColor,
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  loginCloseText: {
-    color: "#fff",
-    fontWeight: "bold"
-  }
 })

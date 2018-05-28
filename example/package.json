@@ -1,5 +1,5 @@
 {
-  "name": "rnstExampleApp",
+  "name": "rnstexampleapp",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "expo": "^27.0.1",
     "react": "16.3.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
-    "react-native-simple-twitter": "^1.2.0",
+    "react-native-simple-twitter": "^2.0.0",
     "react-navigation": "^1.5.11",
     "react-navigation-redux-helpers": "^1.0.5",
     "react-redux": "^5.0.7",

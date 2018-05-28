@@ -63,7 +63,8 @@
   },
   "settings": {
     "import/core-modules": [
-      "app"
+      "react",
+      "react-native"
     ]
   }
 }

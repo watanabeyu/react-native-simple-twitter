@@ -136,15 +136,13 @@ export default class TWLoginButton extends React.Component {
 
     return (
       <Component {...this.props} onPress={this.onButtonPress}>
-        <View style={{ flex: 1 }}>
-          {this.props.children}
-          <Modal visible={this.state.isVisible} animationType="slide" onRequestClose={() => { }}>
-            <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }]}>
-              {this.renderHeader({ headerColor: this.props.headerColor, onClose: this.onClose })}
-              <WebView source={{ uri: this.state.authUrl }} onNavigationStateChange={this.onNavigationStateChange} />
-            </SafeAreaView>
-          </Modal>
-        </View>
+        {this.props.children}
+        <Modal visible={this.state.isVisible} animationType="slide" onRequestClose={() => { }}>
+          <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }]}>
+            {this.renderHeader({ headerColor: this.props.headerColor, onClose: this.onClose })}
+            <WebView source={{ uri: this.state.authUrl }} onNavigationStateChange={this.onNavigationStateChange} />
+          </SafeAreaView>
+        </Modal>
       </Component>
     );
   }

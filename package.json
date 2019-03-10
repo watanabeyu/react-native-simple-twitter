@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-twitter",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Twitter API client for React Native without react-native link",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,7 @@
   "homepage": "https://github.com/watanabeyu/react-native-simple-twitter",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "react-native-safe-area-view": "^0.8.0",
-    "@expo/vector-icons": "^6.3.1"
+    "react-native-safe-area-view": "^0.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

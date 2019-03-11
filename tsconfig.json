@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ESNEXT",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "lib": [
-      "dom",
+      "esnext",
       "es2015",
       "es2016",
       "es2017"
     ],
     "jsx": "preserve",
-    "allowJs": true,
     "moduleResolution": "node",
     "outDir": "dist",
+    "declarationDir": "types",
+    "declaration": true,
     "removeComments": true,
     "strict": true,
     "noUnusedLocals": true,

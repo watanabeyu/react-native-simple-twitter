@@ -21,7 +21,7 @@ export const decodeHTMLEntities = (text: string): string => {
 /**
  * get relative time
  */
-export const getRelativeTime = (dateTime: number): string => {
+export const getRelativeTime = (dateTime: Date | string | number): string => {
   const created = new Date(dateTime);
   const diff = Math.floor((new Date().getTime() - created.getTime()) / 1000);
 

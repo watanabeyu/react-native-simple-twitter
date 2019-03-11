@@ -2,3 +2,4 @@ node_modules
 .expo
 package-lock.json
 dist/
+types/

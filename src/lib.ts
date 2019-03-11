@@ -1,7 +1,6 @@
 /**
  * decode html entity
  */
-
 export const decodeHTMLEntities = (text: string): string => {
   const entities: any = {
     amp: '&',
@@ -22,10 +21,6 @@ export const decodeHTMLEntities = (text: string): string => {
 /**
  * get relative time
  */
-interface getRelativeTime {
-  (dateTime: number): string
-}
-
 export const getRelativeTime = (dateTime: number): string => {
   const created = new Date(dateTime);
   const diff = Math.floor((new Date().getTime() - created.getTime()) / 1000);

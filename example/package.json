@@ -1,5 +1,5 @@
 {
-  "name": "rnstexampleapp",
+  "name": "app",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -9,16 +9,22 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^27.0.1",
-    "react": "16.3.2",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
-    "react-native-simple-twitter": "^2.0.0",
-    "react-navigation": "^1.5.11",
-    "react-navigation-redux-helpers": "^1.0.5",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0"
+    "expo": "^32.0.0",
+    "react": "16.7.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-simple-twitter": "^2.2.0",
+    "react-navigation": "^3.3.2"
   },
   "devDependencies": {
-    "jest-expo": "^27.0.1"
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-preset-expo": "^5.0.0",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest-expo": "^32.0.0",
+    "schedule": "^0.4.0"
   }
 }

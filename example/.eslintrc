@@ -14,40 +14,10 @@
       140,
       2
     ],
-    "react/no-did-mount-set-state": 0,
-    "react/display-name": [
-      0,
-      {
-        "ignoreTranspilerName": false
-      }
-    ],
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
     "react/prop-types": [
       0
     ],
-    "react/prefer-stateless-function": [
-      0,
-      {
-        "ignorePureComponents": true
-      }
-    ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": false,
-        "optionalDependencies": false,
-        "peerDependencies": false,
-        "packageDir": "./"
-      }
-    ],
+    "react/destructuring-assignment": 0,
     "import/no-unresolved": [
       2,
       {
@@ -56,9 +26,16 @@
         ]
       }
     ],
-    "import/extensions": [
-      ".js",
-      ".jsx"
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
     ]
   },
   "settings": {

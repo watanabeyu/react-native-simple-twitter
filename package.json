@@ -26,7 +26,7 @@
   "homepage": "https://github.com/watanabeyu/react-native-simple-twitter",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "react-native-safe-area-view": "^0.8.0"
+    "react-native-safe-area-view": "^0.13.1"
   },
   "devDependencies": {
     "@types/crypto-js": "^3.1.43",
@@ -34,11 +34,11 @@
     "@types/react-native": "^0.57.38",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "babel-eslint": "^8.2.3",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.8.2",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
     "react": "^16.8.4",
     "react-native": "^0.58.6",
     "typescript": "^3.3.3333"

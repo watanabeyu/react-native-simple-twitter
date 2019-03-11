@@ -26,11 +26,14 @@
     "react-native-safe-area-view": "^0.8.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.8.2"
+    "eslint-plugin-react": "^7.8.2",
+    "react-native": "^0.58.6",
+    "typescript": "^3.3.3333"
   }
 }

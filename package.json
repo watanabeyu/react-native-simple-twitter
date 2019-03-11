@@ -2,9 +2,12 @@
   "name": "react-native-simple-twitter",
   "version": "2.1.0",
   "description": "Twitter API client for React Native without react-native link",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prebuild": "tsc --project tsconfig.types.json",
+    "build": "tsc --project tsconfig.json",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

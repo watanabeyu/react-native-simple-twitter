@@ -1,4 +1,4 @@
 node_modules
 .expo
-.npmignore
 package-lock.json
+dist/

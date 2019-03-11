@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  View,
   TouchableOpacity,
   TouchableHighlight,
   TouchableWithoutFeedback,
@@ -12,13 +11,29 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 
 /* components */
-import Header from '../Header';
+import Header from './Header';
 
 /* client */
-import twitter from '../../client';
-import styles from './styles';
+import twitter from '../client';
 
-export default class TWLoginButton extends React.Component {
+interface Props {
+  type: string,
+  headerColor: string,
+  callbackUrl: string,
+  onPress(e: any): void,
+  onGetAccessToken(token: string): void,
+  onClose(e: any): void,
+  onSuccess(user: any): void,
+  onError(err: any): void,
+  renderHeader(props: any): React.ReactElement<{}>,
+}
+
+interface State {
+  isVisible: boolean,
+  authURL: string,
+}
+
+class TWLoginButton extends React.Component<Props, State> {
   static defaultProps = {
     type: 'TouchableOpacity',
     headerColor: '#f7f7f7',
@@ -26,24 +41,23 @@ export default class TWLoginButton extends React.Component {
     onPress: () => { },
     onGetAccessToken: () => { },
     onClose: () => { },
-    onSuccess: () => { },
     onError: () => { },
-    renderHeader: props => <Header {...props} />,
+    renderHeader: (props = {}) => <Header {...props} />,
   }
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.state = {
       isVisible: false,
-      authUrl: null,
+      authURL: '',
     };
 
-    this.token = null;
+    this.token = '';
     this.user = null;
   }
 
-  onNavigationStateChange = async (webViewState) => {
+  onNavigationStateChange = async (webViewState: any) => {
     const match = webViewState.url.match(/\?oauth_token=.+&oauth_verifier=(.+)/);
 
     if (match && match.length > 0) {
@@ -63,8 +77,6 @@ export default class TWLoginButton extends React.Component {
       } catch (err) {
         console.warn(`[getAccessToken failed] ${err}`);
         this.props.onError(err);
-
-        return false;
       }
 
       await this.props.onGetAccessToken(this.token);
@@ -93,22 +105,26 @@ export default class TWLoginButton extends React.Component {
     return false;
   }
 
-  onButtonPress = async (e) => {
+  onButtonPress = async (e: any): Promise<void> => {
     await this.props.onPress(e);
 
     this.setState({
       isVisible: true,
-      authUrl: await twitter.getLoginUrl(this.props.callbackUrl),
+      authURL: await twitter.getLoginUrl(this.props.callbackUrl),
     });
   }
 
-  onClose = async (e) => {
+  onClose = (e: any) => {
     this.setState({
       isVisible: false,
     }, () => this.props.onClose(e));
   }
 
-  renderHeader = (props) => {
+  token!: any
+
+  user!: any
+
+  renderHeader = (props: any) => {
     if (this.props.renderHeader) {
       return React.cloneElement(this.props.renderHeader(props), props);
     }
@@ -137,13 +153,20 @@ export default class TWLoginButton extends React.Component {
     return (
       <Component {...this.props} onPress={this.onButtonPress}>
         {this.props.children}
-        <Modal visible={this.state.isVisible} animationType="slide" onRequestClose={() => { }}>
-          <SafeAreaView style={[styles.safeArea, { backgroundColor: this.props.headerColor }]}>
+        <Modal
+          visible={this.state.isVisible}
+          animationType="slide"
+          onRequestClose={() => { }
+          }
+        >
+          <SafeAreaView style={{ flex: 1, backgroundColor: this.props.headerColor }}>
             {this.renderHeader({ headerColor: this.props.headerColor, onClose: this.onClose })}
-            <WebView source={{ uri: this.state.authUrl }} onNavigationStateChange={this.onNavigationStateChange} />
+            <WebView source={{ uri: this.state.authURL }} onNavigationStateChange={this.onNavigationStateChange} />
           </SafeAreaView>
         </Modal>
       </Component>
     );
   }
 }
+
+export default TWLoginButton;

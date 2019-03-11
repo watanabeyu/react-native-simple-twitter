@@ -1,7 +1,7 @@
 /* lib */
 import * as Util from './util';
 
-export default async (method = 'GET', url = '', params = {}) => {
+const request = async (method: string = 'GET', url: string = '', params: any = {}) => {
   const uri = url
     .replace(/!/g, '%21')
     .replace(/'/g, '%27')
@@ -23,8 +23,11 @@ export default async (method = 'GET', url = '', params = {}) => {
       if (contentType && contentType.indexOf('application/json') !== -1) {
         return response.json();
       }
+
       return response.text().then(r => Util.parseFormEncoding(r));
     });
 
   return result;
 };
+
+export default request;

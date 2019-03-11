@@ -3,23 +3,23 @@ import Request from './request';
 import * as Util from './util';
 
 /* const */
-const baseURL = 'https://api.twitter.com';
-const apiURL = 'https://api.twitter.com/1.1';
-const requestTokenURL = '/oauth/request_token';
-const authorizationURL = '/oauth/authorize';
-const accessTokenURL = '/oauth/access_token';
+const baseURL: string = 'https://api.twitter.com';
+const apiURL: string = 'https://api.twitter.com/1.1';
+const requestTokenURL: string = '/oauth/request_token';
+const authorizationURL: string = '/oauth/authorize';
+const accessTokenURL: string = '/oauth/access_token';
 
 class Client {
-  ConsumerKey = null
-  ConsumerSecret = null
-  Token = null
-  TokenSecret = null
-  TokenRequestHeaderParams = {}
+  ConsumerKey!: string
+  ConsumerSecret!: string
+  Token!: string
+  TokenSecret!: string
+  TokenRequestHeaderParams: any = {}
 
   /**
    * set consumer
    */
-  setConsumerKey = (consumerKey = null, consumerSecret = null) => {
+  setConsumerKey = (consumerKey: string, consumerSecret: string): void => {
     this.ConsumerKey = consumerKey;
     this.ConsumerSecret = consumerSecret;
   }
@@ -27,7 +27,7 @@ class Client {
   /**
    * set access token
    */
-  setAccessToken = (token, tokenSecret) => {
+  setAccessToken = (token: string, tokenSecret: string): void => {
     this.Token = token;
     this.TokenSecret = tokenSecret;
   }
@@ -35,7 +35,7 @@ class Client {
   /**
    * get login redirect url
    */
-  getLoginUrl = async (callback = '') => {
+  getLoginUrl = async (callback: string = ''): Promise<string> => {
     this.TokenRequestHeaderParams = Util.createTokenRequestHeaderParams(this.ConsumerKey, { callback });
     this.TokenRequestHeaderParams = Util.createSignature(this.TokenRequestHeaderParams, 'POST', baseURL + requestTokenURL, this.ConsumerSecret);
 
@@ -52,7 +52,7 @@ class Client {
   /**
    * get access token
    */
-  getAccessToken = async (verifier = '') => {
+  getAccessToken = async (verifier: string = ''): Promise<{ errors?: any, oauth_token: string, oauth_token_secret: string }> => {
     this.TokenRequestHeaderParams = Util.createTokenRequestHeaderParams(this.ConsumerKey, { token: this.Token });
     this.TokenRequestHeaderParams = Util.createSignature(this.TokenRequestHeaderParams, 'POST', baseURL + accessTokenURL, this.ConsumerSecret, this.TokenSecret);
     this.TokenRequestHeaderParams.oauth_verifier = verifier;
@@ -70,7 +70,7 @@ class Client {
   /**
    * call Twitter Api
    */
-  api = async (method = 'GET', endpoint, params = {}) => {
+  api = async (method: string = 'GET', endpoint: string, params: any = {}): Promise<any> => {
     const apiMethod = method.toUpperCase();
     const apiEndpoint = endpoint.slice(0, 1) !== '/' ? `/${endpoint}` : endpoint;
 
@@ -89,7 +89,7 @@ class Client {
   /**
    * api("POST",endpoint,params) alias
    */
-  post = async (endpoint, params = {}) => {
+  post = async (endpoint: string, params: any = {}): Promise<any> => {
     const result = await this.api('POST', endpoint, params);
 
     return result;
@@ -98,7 +98,7 @@ class Client {
   /**
    * api("GET",endpoint,params) alias
    */
-  get = async (endpoint, params = {}) => {
+  get = async (endpoint: string, params: any = {}): Promise<any> => {
     const result = await this.api('GET', endpoint, params);
 
     return result;

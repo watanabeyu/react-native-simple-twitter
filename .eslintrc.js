@@ -3,7 +3,7 @@ module.exports = {
   "env": {
     "es6": true,
     "browser": true,
-    "jest":true
+    "jest": true
   },
   "extends": "airbnb",
   "globals": {
@@ -46,6 +46,17 @@ module.exports = {
       ".jsx",
       ".ts",
       ".tsx"
-    ]
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
   }
 }

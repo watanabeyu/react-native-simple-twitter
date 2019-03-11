@@ -63,9 +63,9 @@ describe('lib test', () => {
 
   it('lib.getRelativeTime()', () => {
     const result1 = lib.getRelativeTime(new Date(new Date().getTime() - 32390));
-    const result2 = lib.getRelativeTime('Thu Apr 06 15:28:43 +0000 2017');
+    const result2 = lib.getRelativeTime('Thu Apr 06 15:28:43 +0900 2017');
 
     expect(result1).toBe('32s');
-    expect(result2).toBe('2017/04/07');
+    expect(result2).toBe('2017/04/06');
   });
 });

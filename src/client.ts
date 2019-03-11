@@ -11,9 +11,13 @@ const accessTokenURL: string = '/oauth/access_token';
 
 class Client {
   ConsumerKey!: string
+
   ConsumerSecret!: string
+
   Token!: string
+
   TokenSecret!: string
+
   TokenRequestHeaderParams: any = {}
 
   /**

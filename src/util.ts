@@ -30,7 +30,7 @@ export const encodeParamsToString = (params: any): string => Object.keys(params)
  */
 export const parseFormEncoding = (formEncoded: string): any => formEncoded.split('&').reduce((obj, form) => {
   const [key, value] = form.split('=');
-  return { ...obj, [key]: value }
+  return { ...obj, [key]: value };
 }, {});
 
 /**

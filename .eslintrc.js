@@ -33,6 +33,17 @@ module.exports = {
       140,
       2
     ],
+    camelcase: [
+      "error",
+      {
+        allow: [
+          "^oauth_",
+          "include_entities",
+          "skip_status",
+          "include_email"
+        ]
+      }
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {

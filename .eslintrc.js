@@ -58,5 +58,6 @@ module.exports = {
         ]
       }
     ],
+    "react/destructuring-assignment": [0]
   }
 }

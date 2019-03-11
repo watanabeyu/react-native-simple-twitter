@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": [
+      "esnext",
+      "es2015",
+      "es2016",
+      "es2017"
+    ],
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "declarationDir": "types",
+    "declaration": true,
+    "removeComments": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "noEmitOnError": false,
+    "inlineSources": true,
+    "types": [
+      "react-native"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

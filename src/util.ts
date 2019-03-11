@@ -1,11 +1,11 @@
 /* npm */
 import HmacSHA1 from 'crypto-js/hmac-sha1';
-import Base64 from 'crypto-js/enc-base64';
+import * as Base64 from 'crypto-js/enc-base64';
 
 /**
  * random strings (initial length -> 32)
  */
-export const randomStrings = (n = 32) => {
+export const randomStrings = (n: number = 32): string => {
   const str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   return Array(...Array(n)).map(() => str.charAt(Math.floor(Math.random() * str.length))).join('');
@@ -14,29 +14,29 @@ export const randomStrings = (n = 32) => {
 /**
  * create header.Authorization string
  */
-export const createHeaderString = params => `OAuth ${Object.keys(params).sort()
+export const createHeaderString = (params: any): string => `OAuth ${Object.keys(params).sort()
   .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   .join(', ')}`;
 
 /**
  * create string object.join(&)
  */
-export const encodeParamsToString = params => Object.keys(params).sort()
+export const encodeParamsToString = (params: any): string => Object.keys(params).sort()
   .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   .join('&');
 
 /**
  * if content-type === text/html, parse response.text()
  */
-export const parseFormEncoding = formEncoded => formEncoded.split('&').reduce((obj, form) => {
+export const parseFormEncoding = (formEncoded: string): any => formEncoded.split('&').reduce((obj, form) => {
   const [key, value] = form.split('=');
-  return Object.assign(obj, { [key]: value });
+  return { ...obj, [key]: value };
 }, {});
 
 /**
  * create params
  */
-export const createTokenRequestHeaderParams = (consumerKey = '', { callback = '', token = '', params = {} }) => Object.assign(
+export const createTokenRequestHeaderParams = (consumerKey: string = '', { callback = '', token = '', params = {} }) => Object.assign(
   {},
   callback ? { oauth_callback: callback } : {},
   {
@@ -53,7 +53,7 @@ export const createTokenRequestHeaderParams = (consumerKey = '', { callback = ''
 /**
  * create OAuth1.0 signature from params
  */
-export const createSignature = (params, method, url, consumerSecret, tokenSecret = null) => {
+export const createSignature = (params: any, method: string, url: string, consumerSecret: string, tokenSecret: string | null = null) => {
   const encodedParameters = encodeParamsToString(params)
     .replace(/!/g, '%21')
     .replace(/'/g, '%27')

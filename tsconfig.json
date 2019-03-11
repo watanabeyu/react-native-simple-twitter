@@ -21,7 +21,9 @@
     "inlineSourceMap": true,
     "noEmitOnError": false,
     "inlineSources": true,
-    "baseUrl": "."
+    "types": [
+      "react-native"
+    ]
   },
   "include": [
     "src/**/*"

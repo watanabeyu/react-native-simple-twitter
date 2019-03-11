@@ -9,5 +9,7 @@ __tests__
 .eslintignore
 .eslintrc.js
 .vscode
+.circleci
 tsconfig.json
 tsconfig.types.json
+babel.config.js

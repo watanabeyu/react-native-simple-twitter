@@ -1,4 +1,5 @@
-**If you have request, Please send a PR or issue.**
+# **If you have request, Please send a PR or issue.**
+* please see [CHANGELOG.md](CHANGELOG.md)
 
 # React-Native-Simple-Twitter v2.0
 Twitter API client for React Native without `react-native link`.  

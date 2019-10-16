@@ -15,14 +15,14 @@ export const randomStrings = (n: number = 32): string => {
  * create header.Authorization string
  */
 export const createHeaderString = (params: any): string => `OAuth ${Object.keys(params).sort()
-  .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+  .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   .join(', ')}`;
 
 /**
  * create string object.join(&)
  */
 export const encodeParamsToString = (params: any): string => Object.keys(params).sort()
-  .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+  .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   .join('&');
 
 /**
@@ -36,19 +36,16 @@ export const parseFormEncoding = (formEncoded: string): any => formEncoded.split
 /**
  * create params
  */
-export const createTokenRequestHeaderParams = (consumerKey: string = '', { callback = '', token = '', params = {} }) => Object.assign(
-  {},
-  callback ? { oauth_callback: callback } : {},
-  {
-    oauth_consumer_key: consumerKey,
-    oauth_nonce: randomStrings(),
-    oauth_signature_method: 'HMAC-SHA1',
-    oauth_timestamp: new Date().getTime() / 1000,
-  },
-  token ? { oauth_token: token } : {},
-  { oauth_version: '1.0' },
-  params,
-);
+export const createTokenRequestHeaderParams = (consumerKey: string = '', { callback = '', token = '', params = {} }) => ({
+  ...(callback ? { oauth_callback: callback } : {}),
+  oauth_consumer_key: consumerKey,
+  oauth_nonce: randomStrings(),
+  oauth_signature_method: 'HMAC-SHA1',
+  oauth_timestamp: new Date().getTime() / 1000,
+  ...(token ? { oauth_token: token } : {}),
+  oauth_version: '1.0',
+  ...params,
+});
 
 /**
  * create OAuth1.0 signature from params
@@ -67,5 +64,5 @@ export const createSignature = (params: any, method: string, url: string, consum
     tokenSecret ? `${encodeURIComponent(consumerSecret)}&${encodeURIComponent(tokenSecret)}` : `${encodeURIComponent(consumerSecret)}&`,
   ));
 
-  return Object.assign({}, params, { oauth_signature: signature });
+  return { ...params, oauth_signature: signature };
 };

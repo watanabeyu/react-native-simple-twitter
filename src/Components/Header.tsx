@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
+  ViewStyle,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -21,23 +22,27 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Props {
-  headerColor: string,
-  style: any,
-  onClose(e: any): void
+type Props = {
+  headerColor: string;
+  style: ViewStyle;
+  closeText: string,
+  onClose: (e: any) => void;
 }
 
-const Header = (props: Props) => (
-  <View style={[styles.container, { backgroundColor: props.headerColor }, props.style]}>
-    <TouchableOpacity onPress={props.onClose} style={styles.closeButton}>
-      <Text style={{ fontSize: 18, color: '#333' }}>close</Text>
-    </TouchableOpacity>
-  </View>
-);
+function Header(props: Props) {
+  return (
+    <View style={[styles.container, { backgroundColor: props.headerColor }, props.style]}>
+      <TouchableOpacity onPress={props.onClose} style={styles.closeButton}>
+        <Text style={{ fontSize: 18, color: '#333' }}>{props.closeText}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 Header.defaultProps = {
   headerColor: '#f7f7f7',
   style: null,
+  closeText: 'close',
   onClose: () => { },
 };
 

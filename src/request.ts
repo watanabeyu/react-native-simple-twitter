@@ -24,7 +24,7 @@ const request = async (method: string = 'GET', url: string = '', params: any = {
         return response.json();
       }
 
-      return response.text().then(r => Util.parseFormEncoding(r));
+      return response.text().then((r) => Util.parseFormEncoding(r));
     });
 
   return result;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -44,26 +44,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    headerTitle: 'ホーム',
-  }
+function HomeScreen(props) {
+  const [user, setUser] = useState(null);
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      user: null,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      user: this.props.navigation.getParam('user', null),
-    });
-  }
-
-  onButtonPress = (e) => {
+  const onButtonPress = (e) => {
     twitter.post('statuses/update.json', { status: 'テストツイート！(Test Tweet!)' }).then((r) => {
       if (!r.errors) {
         Alert.alert(
@@ -80,35 +64,43 @@ export default class HomeScreen extends React.Component {
         console.warn(r);
       }
     });
-  }
+  };
 
-  onLogoutButtonPress = async (e) => {
+  const onLogoutButtonPress = async (e) => {
     await AsyncStorage.removeItem('user');
     twitter.setAccessToken(null, null);
-    this.props.navigation.replace('Login');
+    props.navigation.replace('Login');
+  };
+
+  useEffect(() => {
+    setUser(props.navigation.getParam('user', null));
+  }, []);
+
+  if (!user) {
+    return null;
   }
 
-  render() {
-    if (!this.state.user) {
-      return null;
-    }
-
-    return (
-      <View style={styles.container}>
-        <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 32 }}>
-          <Image source={okImg} style={{ width: 184, height: 200 }} />
-        </View>
-        <View style={styles.content}>
-          <Text style={styles.name}>{`${this.state.user.name} @${this.state.user.screen_name}`}</Text>
-          <Text style={styles.description}>{this.state.user.description}</Text>
-          <TouchableOpacity style={styles.button} onPress={this.onButtonPress}>
-            <Text style={styles.buttonText}>Tweetする</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, { backgroundColor: '#cfcfcf', marginTop: 40 }]} onPress={this.onLogoutButtonPress}>
-            <Text style={styles.buttonText}>ログアウトする</Text>
-          </TouchableOpacity>
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 32 }}>
+        <Image source={okImg} style={{ width: 184, height: 200 }} />
       </View>
-    );
-  }
+      <View style={styles.content}>
+        <Text style={styles.name}>{`${user.name} @${user.screen_name}`}</Text>
+        <Text style={styles.description}>{user.description}</Text>
+        <TouchableOpacity style={styles.button} onPress={onButtonPress}>
+          <Text style={styles.buttonText}>Tweetする</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, { backgroundColor: '#cfcfcf', marginTop: 40 }]} onPress={onLogoutButtonPress}>
+          <Text style={styles.buttonText}>ログアウトする</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+
+HomeScreen.navigationOptions = {
+  headerTitle: 'ホーム',
+};
+
+export default HomeScreen;

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TouchableOpacity,
   TouchableHighlight,
   TouchableWithoutFeedback,
   Modal,
-  WebView,
+  SafeAreaView,
 } from 'react-native';
 
 /* npm */
-import SafeAreaView from 'react-native-safe-area-view';
+import WebView from 'react-native-webview';
 
 /* components */
 import Header from './Header';
@@ -16,54 +16,67 @@ import Header from './Header';
 /* client */
 import twitter from '../client';
 
-interface Props {
-  type: string,
-  headerColor: string,
-  callbackUrl: string,
-  onPress(e: any): void,
-  onGetAccessToken(token: string): void,
-  onClose(e: any): void,
-  onSuccess(user: any): void,
-  onError(err: any): void,
-  renderHeader(props: any): React.ReactElement<{}>,
+type Token = {
+  oauth_token: string;
+  oauth_token_secret: string;
 }
 
-interface State {
-  isVisible: boolean,
-  authURL: string,
+type Props = {
+  type: string;
+  headerColor: string;
+  callbackUrl: string;
+  closeText: string;
+  onPress: (e: any) => void;
+  onGetAccessToken: (token: Token) => void;
+  onClose: (e: any) => void;
+  onSuccess: (user: any) => void;
+  onError: (e: any) => void;
+  renderHeader: (props: any) => React.ReactElement<{}>;
+  children: any;
 }
 
-class TWLoginButton extends React.Component<Props, State> {
-  static defaultProps = {
-    type: 'TouchableOpacity',
-    headerColor: '#f7f7f7',
-    callbackUrl: null,
-    onPress: () => { },
-    onGetAccessToken: () => { },
-    onClose: () => { },
-    onError: () => { },
-    renderHeader: (props = {}) => <Header {...props} />,
+function TWLoginButton(props: Props) {
+  const [isVisible, setVisible] = useState<boolean>(false);
+  const [authURL, setAuthURL] = useState<string>('');
+  const [token, setToken] = useState<Token>({ oauth_token: '', oauth_token_secret: '' });
+
+  let Component;
+  switch (props.type) {
+    case 'TouchableOpacity':
+      Component = TouchableOpacity;
+      break;
+    case 'TouchableHighlight':
+      Component = TouchableHighlight;
+      break;
+    case 'TouchableWithoutFeedback':
+      Component = TouchableWithoutFeedback;
+      break;
+    default:
+      console.warn('TWLoginButton type must be TouchableOpacity or TouchableHighlight or TouchableWithoutFeedback');
+      return null;
   }
 
-  constructor(props: any) {
-    super(props);
+  const onButtonPress = async (e: any): Promise<void> => {
+    await props.onPress(e);
 
-    this.state = {
-      isVisible: false,
-      authURL: '',
-    };
+    try {
+      const loginURL = await twitter.getLoginUrl(props.callbackUrl);
+      setAuthURL(loginURL);
+    } catch (err) {
+      console.warn(`[getLoginUrl failed] ${err}`);
+    }
+  };
 
-    this.token = '';
-    this.user = null;
-  }
+  const onClosePress = (e: any) => {
+    setVisible(false);
+    props.onClose(e);
+  };
 
-  onNavigationStateChange = async (webViewState: any) => {
+  const onNavigationStateChange = async (webViewState: any) => {
     const match = webViewState.url.match(/\?oauth_token=.+&oauth_verifier=(.+)/);
 
     if (match && match.length > 0) {
-      this.setState({
-        isVisible: false,
-      });
+      setVisible(false);
 
       /* get access token */
       try {
@@ -73,100 +86,75 @@ class TWLoginButton extends React.Component<Props, State> {
           throw new Error(JSON.stringify(response.errors));
         }
 
-        this.token = response;
+        setToken(response);
       } catch (err) {
         console.warn(`[getAccessToken failed] ${err}`);
-        this.props.onError(err);
+
+        props.onError(err);
       }
+    }
+  };
 
-      await this.props.onGetAccessToken(this.token);
+  useEffect(() => {
+    if (authURL !== '') {
+      setVisible(true);
+    }
+  }, [authURL]);
 
-      /* get account */
-      try {
-        const response = await twitter.get('account/verify_credentials.json', { include_entities: false, skip_status: true, include_email: true });
+  useEffect(() => {
+    if (!isVisible) {
+      setAuthURL('');
+    }
+  }, [isVisible]);
 
+  useEffect(() => {
+    if (token && token.oauth_token && token.oauth_token_secret) {
+      props.onGetAccessToken(token);
+
+      const options = {
+        include_entities: false,
+        skip_status: true,
+        include_email: true,
+      };
+
+      twitter.get('account/verify_credentials.json', options).then((response) => {
         if (response.errors) {
-          throw new Error(JSON.stringify(response.errors));
+          const err = JSON.stringify(response.errors);
+          console.warn(`[get("account/verify_credentials.json") failed] ${err}`);
+
+          props.onError(err);
+        } else {
+          props.onSuccess(response);
         }
-
-        this.user = response;
-      } catch (err) {
-        console.warn(`[get("account/verify_credentials.json") failed] ${err}`);
-        this.props.onError(err);
-
-        return false;
-      }
-
-      await this.props.onSuccess(this.user);
-
-      return true;
+      });
     }
+  }, [token]);
 
-    return false;
-  }
-
-  onButtonPress = async (e: any): Promise<void> => {
-    await this.props.onPress(e);
-
-    this.setState({
-      isVisible: true,
-      authURL: await twitter.getLoginUrl(this.props.callbackUrl),
-    });
-  }
-
-  onClose = (e: any) => {
-    this.setState({
-      isVisible: false,
-    }, () => this.props.onClose(e));
-  }
-
-  token!: any
-
-  user!: any
-
-  renderHeader = (props: any) => {
-    if (this.props.renderHeader) {
-      return React.cloneElement(this.props.renderHeader(props), props);
-    }
-
-    return <Header {...props} />;
-  }
-
-  render() {
-    let Component;
-
-    switch (this.props.type) {
-      case 'TouchableOpacity':
-        Component = TouchableOpacity;
-        break;
-      case 'TouchableHighlight':
-        Component = TouchableHighlight;
-        break;
-      case 'TouchableWithoutFeedback':
-        Component = TouchableWithoutFeedback;
-        break;
-      default:
-        console.warn('TWLoginButton type must be TouchableOpacity or TouchableHighlight or TouchableWithoutFeedback');
-        return null;
-    }
-
-    return (
-      <Component {...this.props} onPress={this.onButtonPress}>
-        {this.props.children}
-        <Modal
-          visible={this.state.isVisible}
-          animationType="slide"
-          onRequestClose={() => { }
-          }
-        >
-          <SafeAreaView style={{ flex: 1, backgroundColor: this.props.headerColor }}>
-            {this.renderHeader({ headerColor: this.props.headerColor, onClose: this.onClose })}
-            <WebView source={{ uri: this.state.authURL }} onNavigationStateChange={this.onNavigationStateChange} />
-          </SafeAreaView>
-        </Modal>
-      </Component>
-    );
-  }
+  return (
+    <Component {...props} onPress={onButtonPress}>
+      {props.children}
+      <Modal visible={isVisible} animationType="slide" onRequestClose={() => { }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: props.headerColor }}>
+          {props.renderHeader ? props.renderHeader({ onClose: onClosePress })
+            : <Header headerColor={props.headerColor} onClose={onClosePress} closeText={props.closeText} />}
+          <WebView source={{ uri: authURL }} onNavigationStateChange={onNavigationStateChange} />
+        </SafeAreaView>
+      </Modal>
+    </Component>
+  );
 }
+
+TWLoginButton.defaultProps = {
+  type: 'TouchableOpacity',
+  headerColor: '#f7f7f7',
+  callbackUrl: null,
+  closeText: 'close',
+  onPress: () => { },
+  onGetAccessToken: () => { },
+  onClose: () => { },
+  onError: () => { },
+  renderHeader: null,
+  children: null,
+};
 
 export default TWLoginButton;

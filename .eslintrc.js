@@ -10,12 +10,6 @@ module.exports = {
     "__DEV__": true
   },
   "settings": {
-    "import/extensions": [
-      ".js",
-      ".jsx",
-      ".ts",
-      ".tsx"
-    ],
     "import/resolver": {
       "node": {
         "extensions": [
@@ -52,12 +46,7 @@ module.exports = {
         "peerDependencies": false
       }
     ],
-    "import/extensions": [
-      ".js",
-      ".jsx",
-      ".ts",
-      ".tsx"
-    ],
+    "react/jsx-props-no-spreading": 0,
     "react/jsx-filename-extension": [
       "error",
       {

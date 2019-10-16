@@ -1,3 +1,6 @@
+# **If you have request, Please send a PR or issue.**
+* please see [CHANGELOG.md](CHANGELOG.md)
+
 # React-Native-Simple-Twitter v2.0
 Twitter API client for React Native without `react-native link`.  
 This client not use NativeModule, only pure javascript.  
@@ -32,13 +35,14 @@ npm install react-native-simple-twitter --save
 | type | string | TouchableOpacity | TouchableOpacity or TouchableHighlight or TouchableWithoutFeedback |
 | children | React.Component |  |  |
 | callbackUrl | string | null | Twitter application callback url |
+| closeText | string | 'close' | default header's close text |
 | headerColor | string | '#f7f7f7' | Webview's modal and SafeAreaView backgroundColor |
 | onPress | func | (e) => {} | Called when login button on Press | 
 | onGetAccessToken | func | ({oauth_token,oauth_token_secret}) => {} | Called when get access token |
 | onClose | func | () => {} | Called when press close button |
 | onSuccess | func | (user) => {} | Called when logged in and get user account |
 | onError | func | (e) => {} | Called when on error |
-| renderHeader | func | (props) => React.Component | If you use original Header Component,use this props |
+| renderHeader | func | (props:{onClose:(e:any) => void}) => React.Component | If you use original Header Component,use this props |
 
 I changed `TWLoginButton` to React.Component(TouchableOpacity or TouchableHighlight or TouchableWithoutFeedback).  
 So you can use each props and customize.

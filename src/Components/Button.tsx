@@ -58,9 +58,13 @@ function TWLoginButton(props: Props) {
 
   const onButtonPress = async (e: any): Promise<void> => {
     await props.onPress(e);
-    const loginURL = await twitter.getLoginUrl(props.callbackUrl);
 
-    setAuthURL(loginURL);
+    try {
+      const loginURL = await twitter.getLoginUrl(props.callbackUrl);
+      setAuthURL(loginURL);
+    } catch (err) {
+      console.warn(`[getLoginUrl failed] ${err}`);
+    }
   };
 
   const onClosePress = (e: any) => {
@@ -96,6 +100,12 @@ function TWLoginButton(props: Props) {
       setVisible(true);
     }
   }, [authURL]);
+
+  useEffect(() => {
+    if (!isVisible) {
+      setAuthURL('');
+    }
+  }, [isVisible]);
 
   useEffect(() => {
     if (token && token.oauth_token && token.oauth_token_secret) {

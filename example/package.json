@@ -9,10 +9,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^32.0.0",
-    "react": "16.7.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-simple-twitter": "^2.2.0",
+    "expo": "^35.0.0",
+    "expo-constants": "^7.0.0",
+    "react": "16.8.4",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-simple-twitter": "^2.4.0",
     "react-navigation": "^3.3.2"
   },
   "devDependencies": {

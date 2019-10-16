@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  AppLoading,
-  Constants,
-} from 'expo';
+import { AppLoading } from 'expo';
+import Constants from 'expo-constants';
 import Navigation from 'app/src';
 
 /* npm */
@@ -26,7 +24,7 @@ export default class App extends React.Component {
       return (
         <AppLoading
           startAsync={this.loadResourcesAsync}
-          onError={error => console.warn(error)}
+          onError={(error) => console.warn(error)}
           onFinish={() => this.setState({ isLoadingComplete: true })}
         />
       );

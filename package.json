@@ -1,6 +1,6 @@
 {
   "name": "react-native-simple-twitter",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Twitter API client for React Native without react-native link",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -25,7 +25,7 @@
   "homepage": "https://github.com/watanabeyu/react-native-simple-twitter",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "react-native-webview": "^7.4.2"
+    "react-native-webview": "^7.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

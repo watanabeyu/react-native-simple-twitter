@@ -17,12 +17,12 @@
     "esModuleInterop": true,
     "inlineSourceMap": true,
     "noEmitOnError": false,
-    "inlineSources": true,
-    "types": [
-      "react-native"
-    ]
+    "inlineSources": true
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

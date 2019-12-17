@@ -77,12 +77,16 @@ const useTwitter = (props?: Props) => {
 
       client.api<TwitterUser>('GET', 'account/verify_credentials.json', options).then((response) => {
         props.onSuccess(response, { oauth_token: client.Token, oauth_token_secret: client.TokenSecret });
+
+        setLoggedIn(false);
       }).catch((err) => {
         console.warn(`[get("account/verify_credentials.json") failed] ${err}`);
 
         if (props?.onError) {
           props.onError(err);
         }
+
+        setLoggedIn(false);
       });
     }
   }, [loggedIn]);

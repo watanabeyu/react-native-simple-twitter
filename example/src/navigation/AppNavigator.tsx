@@ -1,7 +1,5 @@
-import {
-  createStackNavigator,
-  createAppContainer,
-} from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 /* screen */
 import LoginScreen from 'app/src/screens/LoginScreen';

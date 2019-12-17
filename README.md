@@ -1,5 +1,6 @@
 # **If you have request, Please send a PR or issue.**
 * please see [CHANGELOG.md](CHANGELOG.md)
+* `TWLoginButton` / `twitter.get()` / `twitter.post()` will be removed on next version (v3.1.0).
 
 # React-Native-Simple-Twitter v3.0
 Twitter API client for React Native without `react-native link`.  
@@ -46,7 +47,7 @@ function Login() {
   
 Checkout v3.x [example](example).  
   
-Previous version -> [v2.4.1](https://github.com/watanabeyu/react-native-simple-twitter/tree/2759e423db803d31f50bdb24adcabbf43afd925d)
+Previous version -> [v2.4.1](https://github.com/watanabeyu/react-native-simple-twitter/tree/2759e423db803d31f50bdb24adcabbf43afd925d) 
 
 ## Installation
 This package use WebView, but WebView from react-native is deprecated, so you download with `react-native-webview`.

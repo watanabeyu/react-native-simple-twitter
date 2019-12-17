@@ -46,7 +46,7 @@
     "eslint-plugin-react": "^7.17.0",
     "jest": "^24.9.0",
     "react": "^16.9.6",
-    "react-native": "^0.61.4",
+    "react-native": "^0.59.8",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
   },
@@ -71,9 +71,6 @@
     },
     "testMatch": [
       "**/__tests__/**/*.test.(ts|tsx|js)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/"
     ]
   }
 }

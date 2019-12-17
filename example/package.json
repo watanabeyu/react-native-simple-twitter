@@ -13,7 +13,7 @@
     "expo-constants": "^7.0.0",
     "react": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-simple-twitter": "^2.4.1",
+    "react-native-simple-twitter": "^3.0.0",
     "react-native-webview": "^8.0.1",
     "react-navigation": "^4.0.10"
   },

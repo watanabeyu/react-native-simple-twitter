@@ -6,6 +6,8 @@ import {
   getRelativeTime,
 } from './lib';
 
+import useTwitter from './hooks';
+
 /* export Client as default */
 export default Client;
 
@@ -14,4 +16,5 @@ export {
   TWLoginButton,
   decodeHTMLEntities,
   getRelativeTime,
+  useTwitter,
 };

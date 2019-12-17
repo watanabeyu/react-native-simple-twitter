@@ -1,7 +1,8 @@
 /* lib */
 import * as Util from './util';
+import { Method, ErrorResponse } from './types';
 
-const request = async (method: string = 'GET', url: string = '', params: any = {}) => {
+const request = async <T>(method: Method = 'GET', url: string = '', params: any = {}): Promise<T | ErrorResponse> => {
   const uri = url
     .replace(/!/g, '%21')
     .replace(/'/g, '%27')
@@ -16,18 +17,21 @@ const request = async (method: string = 'GET', url: string = '', params: any = {
     },
   };
 
-  const result = await fetch(uri, options)
-    .then((response) => {
-      const contentType = response.headers.get('content-type');
+  const response = await fetch(uri, options);
 
-      if (contentType && contentType.indexOf('application/json') !== -1) {
-        return response.json();
-      }
+  const contentType = response.headers.get('content-type');
 
-      return response.text().then((r) => Util.parseFormEncoding(r));
-    });
+  /* json */
+  if (contentType && contentType.indexOf('application/json') !== -1) {
+    const result = await response.json();
 
-  return result;
+    return result;
+  }
+
+  /* encoded */
+  const result = await response.text();
+
+  return Util.parseFormEncoding(result);
 };
 
 export default request;

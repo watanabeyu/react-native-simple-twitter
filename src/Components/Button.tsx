@@ -16,21 +16,18 @@ import Header from './Header';
 /* client */
 import twitter from '../client';
 
-type Token = {
-  oauth_token: string;
-  oauth_token_secret: string;
-}
+import { ErrorResponse, AccessToken, TwitterUser } from '../types';
 
 type Props = {
-  type: string;
+  type: 'TouchableOpacity' | 'TouchableHighlight' | 'TouchableWithoutFeedback';
   headerColor: string;
   callbackUrl: string;
   closeText: string;
   onPress: (e: any) => void;
-  onGetAccessToken: (token: Token) => void;
+  onGetAccessToken: (token: AccessToken) => void;
   onClose: (e: any) => void;
-  onSuccess: (user: any) => void;
-  onError: (e: any) => void;
+  onSuccess: (user: TwitterUser) => void;
+  onError: (e: ErrorResponse) => void;
   renderHeader: (props: any) => React.ReactElement<{}>;
   children: any;
 }
@@ -38,7 +35,7 @@ type Props = {
 function TWLoginButton(props: Props) {
   const [isVisible, setVisible] = useState<boolean>(false);
   const [authURL, setAuthURL] = useState<string>('');
-  const [token, setToken] = useState<Token>({ oauth_token: '', oauth_token_secret: '' });
+  const [token, setToken] = useState<AccessToken>({ oauth_token: '', oauth_token_secret: '' });
 
   let Component;
   switch (props.type) {
@@ -81,11 +78,6 @@ function TWLoginButton(props: Props) {
       /* get access token */
       try {
         const response = await twitter.getAccessToken(match[1]);
-
-        if (response.errors) {
-          throw new Error(JSON.stringify(response.errors));
-        }
-
         setToken(response);
       } catch (err) {
         console.warn(`[getAccessToken failed] ${err}`);
@@ -117,16 +109,9 @@ function TWLoginButton(props: Props) {
         include_email: true,
       };
 
-      twitter.get('account/verify_credentials.json', options).then((response) => {
-        if (response.errors) {
-          const err = JSON.stringify(response.errors);
-          console.warn(`[get("account/verify_credentials.json") failed] ${err}`);
-
-          props.onError(err);
-        } else {
-          props.onSuccess(response);
-        }
-      });
+      twitter.api<TwitterUser>('GET', 'account/verify_credentials.json', options).then((response) => {
+        props.onSuccess(response);
+      }).catch((err) => { props.onError(err); });
     }
   }, [token]);
 

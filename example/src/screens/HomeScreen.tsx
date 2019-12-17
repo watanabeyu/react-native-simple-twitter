@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 /* import twitter */
-import twitter from 'react-native-simple-twitter';
+import { useTwitter } from 'react-native-simple-twitter';
 
 /* img */
 const okImg = require('app/assets/images/ok_man.png');
@@ -45,29 +45,31 @@ const styles = StyleSheet.create({
 });
 
 function HomeScreen(props) {
+  const { twitter } = useTwitter();
   const [user, setUser] = useState(null);
 
-  const onButtonPress = (e) => {
-    twitter.post('statuses/update.json', { status: 'テストツイート！(Test Tweet!)' }).then((r) => {
-      if (!r.errors) {
-        Alert.alert(
-          'Success',
-          'ツイートできました',
-          [
-            {
-              text: 'ok',
-              onPress: () => console.log('ok'),
-            },
-          ],
-        );
-      } else {
-        console.warn(r);
-      }
-    });
+  const onButtonPress = async () => {
+    try {
+      await twitter.api('POST', 'statuses/update.json', { status: 'テストツイート！(Test Tweet!)' });
+
+      Alert.alert(
+        'Success',
+        'ツイートできました',
+        [
+          {
+            text: 'ok',
+            onPress: () => console.log('ok'),
+          },
+        ],
+      );
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
-  const onLogoutButtonPress = async (e) => {
+  const onLogoutButtonPress = async () => {
     await AsyncStorage.removeItem('user');
+    await AsyncStorage.removeItem('token');
     twitter.setAccessToken(null, null);
     props.navigation.replace('Login');
   };

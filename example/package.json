@@ -9,12 +9,13 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^35.0.0",
+    "expo": "~36.0.0",
     "expo-constants": "^7.0.0",
-    "react": "16.8.4",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
-    "react-native-simple-twitter": "^2.4.0",
-    "react-navigation": "^3.3.2"
+    "react": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-simple-twitter": "^2.4.1",
+    "react-native-webview": "^8.0.1",
+    "react-navigation": "^4.0.10"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -26,6 +27,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "jest-expo": "^32.0.0",
-    "schedule": "^0.4.0"
+    "schedule": "^0.4.0",
+    "typescript": "^3.7.3"
   }
 }

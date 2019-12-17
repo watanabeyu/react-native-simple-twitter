@@ -36,7 +36,7 @@ export const parseFormEncoding = (formEncoded: string): any => formEncoded.split
 /**
  * create params
  */
-export const createTokenRequestHeaderParams = (consumerKey: string = '', { callback = '', token = '', params = {} }) => ({
+export const createTokenRequestHeaderParams = (consumerKey: string, { callback, token, params }: { callback?: string, token?: string, params?: any }) => ({
   ...(callback ? { oauth_callback: callback } : {}),
   oauth_consumer_key: consumerKey,
   oauth_nonce: randomStrings(),
@@ -50,7 +50,7 @@ export const createTokenRequestHeaderParams = (consumerKey: string = '', { callb
 /**
  * create OAuth1.0 signature from params
  */
-export const createSignature = (params: any, method: string, url: string, consumerSecret: string, tokenSecret: string | null = null) => {
+export const createSignature = (params: object, method: string, url: string, consumerSecret: string, tokenSecret?: string) => {
   const encodedParameters = encodeParamsToString(params)
     .replace(/!/g, '%21')
     .replace(/'/g, '%27')

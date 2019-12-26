@@ -7,6 +7,7 @@ import {
 } from './lib';
 
 import useTwitter from './hooks';
+import * as SimpleTwitterTypes from './types';
 
 /* export Client as default */
 export default Client;
@@ -17,4 +18,5 @@ export {
   decodeHTMLEntities,
   getRelativeTime,
   useTwitter,
+  SimpleTwitterTypes,
 };

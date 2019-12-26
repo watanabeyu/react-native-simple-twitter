@@ -29,7 +29,11 @@ function TWLoginModal(props: Props & PackageProps) {
       <SafeAreaView style={{ flex: 1, backgroundColor: props.headerColor }}>
         {props.renderHeader ? props.renderHeader({ onClose: props.onClosePress })
           : <Header headerColor={props.headerColor} onClose={props.onClosePress} closeText={props.closeText} />}
-        <WebView source={{ uri: props.authURL }} onNavigationStateChange={props.onWebViewStateChanged} />
+        <WebView
+          startInLoadingState
+          source={{ uri: props.authURL }}
+          onNavigationStateChange={props.onWebViewStateChanged}
+        />
       </SafeAreaView>
     </Modal>
   );

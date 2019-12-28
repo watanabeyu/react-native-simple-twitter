@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { NativeModules } from 'react-native';
 
 /* node_modules */
 import { WebViewNavigation } from 'react-native-webview';
@@ -24,6 +25,10 @@ const useTwitter = (props?: Props) => {
 
     setAuthURL(url);
     setVisible(true);
+  };
+
+  const clearCookies = (callback: (result: boolean) => void = () => { }) => {
+    NativeModules.Networking.clearCookies(callback);
   };
 
   const TWModal = useCallback((modalProps: ModalProps) => {
@@ -94,6 +99,7 @@ const useTwitter = (props?: Props) => {
   return {
     twitter: {
       login,
+      clearCookies,
       getAccessToken: (): AccessToken => ({ oauth_token: client.Token, oauth_token_secret: client.TokenSecret }),
       setAccessToken: client.setAccessToken,
       setConsumerKey: client.setConsumerKey,

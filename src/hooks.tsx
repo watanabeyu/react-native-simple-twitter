@@ -37,6 +37,7 @@ const useTwitter = (props?: Props) => {
         authURL={authURL}
         onClosePress={() => setVisible(false)}
         onWebViewStateChanged={onWebViewStateChanged}
+        incognito={modalProps.incognito}
         headerColor={modalProps.headerColor}
         closeText={modalProps.closeText}
         renderHeader={modalProps.renderHeader}

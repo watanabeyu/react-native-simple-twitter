@@ -18,6 +18,7 @@ type PackageProps = {
 }
 
 export type Props = {
+  incognito?: boolean,
   headerColor?: string,
   closeText?: string,
   renderHeader?: (props: { onClose: () => void }) => React.ReactElement,
@@ -30,6 +31,7 @@ function TWLoginModal(props: Props & PackageProps) {
         {props.renderHeader ? props.renderHeader({ onClose: props.onClosePress })
           : <Header headerColor={props.headerColor} onClose={props.onClosePress} closeText={props.closeText} />}
         <WebView
+          incognito={props.incognito}
           startInLoadingState
           source={{ uri: props.authURL }}
           onNavigationStateChange={props.onWebViewStateChanged}
@@ -40,6 +42,7 @@ function TWLoginModal(props: Props & PackageProps) {
 }
 
 TWLoginModal.defaultProps = {
+  incognito: false,
   headerColor: '#f7f7f7',
   closeText: 'close',
   renderHeader: null,

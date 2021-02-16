@@ -43,6 +43,7 @@ const useTwitter = (props?: Props) => {
         onClosePress={() => setVisible(false)}
         onWebViewStateChanged={onWebViewStateChanged}
         headerColor={modalProps.headerColor}
+        headerColor={modalProps.textColor}
         closeText={modalProps.closeText}
         renderHeader={modalProps.renderHeader}
       />

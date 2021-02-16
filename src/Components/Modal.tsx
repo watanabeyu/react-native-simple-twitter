@@ -19,6 +19,7 @@ type PackageProps = {
 
 export type Props = {
   headerColor?: string,
+  textColor?: string,
   closeText?: string,
   renderHeader?: (props: { onClose: () => void }) => React.ReactElement,
 }
@@ -28,7 +29,7 @@ function TWLoginModal(props: Props & PackageProps) {
     <Modal visible={props.visible} animationType="slide" onRequestClose={() => { }}>
       <SafeAreaView style={{ flex: 1, backgroundColor: props.headerColor }}>
         {props.renderHeader ? props.renderHeader({ onClose: props.onClosePress })
-          : <Header headerColor={props.headerColor} onClose={props.onClosePress} closeText={props.closeText} />}
+          : <Header textColor={props.textColor} headerColor={props.headerColor} onClose={props.onClosePress} closeText={props.closeText} />}
         <WebView
           startInLoadingState
           source={{ uri: props.authURL }}

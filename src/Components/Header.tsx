@@ -34,7 +34,7 @@ function Header(props: Props) {
   return (
     <View style={[styles.container, { backgroundColor: props.headerColor }, props.style]}>
       <TouchableOpacity onPress={props.onClose} style={styles.closeButton}>
-        <Text style={{ fontSize: 18, color: textColor }}>{props.closeText}</Text>
+        <Text style={{ fontSize: 18, color: props.textColor }}>{props.closeText}</Text>
       </TouchableOpacity>
     </View>
   );

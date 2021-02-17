@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   headerColor: string;
+  textColor: string;
   style: ViewStyle;
   closeText: string,
   onClose: (e: any) => void;
@@ -33,7 +34,7 @@ function Header(props: Props) {
   return (
     <View style={[styles.container, { backgroundColor: props.headerColor }, props.style]}>
       <TouchableOpacity onPress={props.onClose} style={styles.closeButton}>
-        <Text style={{ fontSize: 18, color: '#333' }}>{props.closeText}</Text>
+        <Text style={{ fontSize: 18, color: props.textColor }}>{props.closeText}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -41,6 +42,7 @@ function Header(props: Props) {
 
 Header.defaultProps = {
   headerColor: '#f7f7f7',
+  textColor: '#333',
   style: null,
   closeText: 'close',
   onClose: () => { },
